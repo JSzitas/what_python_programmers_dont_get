@@ -2,7 +2,7 @@
 
 This project, named to be slightly inflammatory in the programming language flame wars, 
 is an example of speeding a project up purely by optimizing the memory layout. This features 
-two versions of otherwise identical code, with algorithms with identical big $\Omega$ complexity.
+two versions of otherwise identical code, with algorithms with identical big $O$ complexity.
 
 Arguably, the faster algorithm even has a slightly worse constant; what we are comparing here two 
 implementations a QR decomposition. This is based on [Givens rotations](), and both versions are logically 
