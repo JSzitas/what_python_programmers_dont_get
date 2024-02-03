@@ -26,7 +26,7 @@
 #include "./tinyqr.h"
 #include "utils.h"
 
-int main() {
+int main(int argc, char** argv) {
   using scalar_t = double;
   using tinyqr::QRImpl;
   using tinyqr::qr_decomposition;
@@ -49,6 +49,10 @@ int main() {
     }
     std::cout << "Performance on non-square matrices:\n";
     benchmark.report();
+    if(argc > 1) {
+      // dump to output file
+      benchmark.to_file(argv[1]);
+    }
   }();
   return 0;
 }

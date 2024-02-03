@@ -180,6 +180,19 @@ struct Benchmarker {
               << " | best speedup: " << max_ << "\nAverage speed v1: " << mean1 <<
             " | Average speed v2: "<< mean2 <<std::endl;
   }
+private:
+  void to_file_impl(const char* file) {
+    std::ofstream out(file, std::ios::out | std::ios::app);
+    out << "Average speedup: " << mean
+        << " | Median speedup: " << median.value()
+        << " | Total time: " << total << " | worst speedup: " << min_
+        << " | best speedup: " << max_ << "\nAverage speed v1: " << mean1 <<
+        " | Average speed v2: "<< mean2;
+    out.close();
+  }
+public:
+  void to_file(const std::string file) { to_file_impl(file.c_str());}
+  void to_file(const char* file) { to_file_impl(file); }
 };
 
 template <const size_t max_iterations = 1000, typename... Ts,

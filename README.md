@@ -5,7 +5,7 @@ is an example of speeding a project up purely by optimizing the memory layout. T
 two versions of otherwise identical code, with algorithms with identical big $O$ complexity.
 
 Arguably, the faster algorithm even has a slightly worse constant; what we are comparing here two 
-implementations a QR decomposition. This is based on [Givens rotations](), and both versions are logically 
+implementations a QR decomposition. This is based on [Givens rotations](https://en.wikipedia.org/wiki/Givens_rotation), and both versions are logically 
 equivalent; they both perform rotations in the same way. 
 
 **The only difference is the memory layout.**
@@ -20,7 +20,7 @@ Suppose we have a matrix:
 
 $$ \begin{bmatrix}
   1 & 2 \\
-  3 & 4f \\
+  3 & 4 \\
   \end{bmatrix} $$
 
 
@@ -80,21 +80,45 @@ for j in columns:
 return Q, R
 ```
 
-
-
-
-
-
-
 ### The benchmark
 
+I run three benchmarks;
+
+* **Non-Square** matrices of size n >= p (General tall matrix) - what I deem the most common use case
+* **Square** (n == p, where n is a multiple of 2) - the second most common use case; you would have this 
+  if you were implementing the [QR algorithm](https://en.wikipedia.org/wiki/QR_algorithm)
+* **Unaligned Square** (n == p, where n is a multiple of 2 offset by 1) - purely to show what impact
+  some small amount of cache misalignment can have
+
+across three different optimization levels:
+
+* **unoptimized** (-O0) - as a baseline
+* **optimized** (-03) - as what is more realistic to observe
+* **optimized natively** (-03 -march=-native) - to see whether optimizing to the CPU architecture 
+  actually leads to a significant difference (in principle this should improve things like auto vectorization)
+
+### The results
 
 
-
-
-### The conclusion
 
 
 #### Additional reading/talks
+
+I was originally inspired by numerous talks to investigate this topic. 
+I strongly recommend watching:
+
+[Mike Acton's legendary talk at CppCon 2014](https://www.youtube.com/watch?v=rX0ItVEVjHc&t=51s)
+
+[A follow-up on Data Oriented Programming](https://www.youtube.com/watch?v=yy8jQgmhbAU)
+
+[A very good talk by Andrei Alexandrescu from CppCon 2019](https://www.youtube.com/watch?v=FJJTYQYB1JQ)
+
+[A really nice hash table implementation](https://www.youtube.com/watch?v=DMQ_HcNSOAI&t=1s)
+
+[A really long-winded way of saying having to do virtual calls, aka every method access in Python, can be horribly slow](https://www.youtube.com/watch?v=tD5NrevFtbU&t=1023s)
+
+[Related to above, a nice motivation for improving performance](https://www.youtube.com/watch?v=x2EOOJg8FkA&t=203s)
+
+
 
 
