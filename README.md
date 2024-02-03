@@ -17,7 +17,12 @@ fiction, what we need to decide is how exactly we will lay the values in the mat
 * or row wise, also known as row major
 
 Suppose we have a matrix:
-$\begin{bmatrix}1 & 2\\3 & 4\end{bmatrix}$
+
+$$ \begin{bmatrix}
+  1 & 2 \\
+  3 & 4f \\
+  \end{bmatrix} $$
+
 
 In the first case, our 1d array is equal to [1, 3, 2, 4]. In the second, it is [1, 2, 3, 4].
 
