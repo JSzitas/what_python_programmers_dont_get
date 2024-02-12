@@ -132,7 +132,7 @@ void benchmark(F& fun, const size_t max_iterations = 1000) {
   }
   std::cout << "Average time: " << timing / max_iterations
             << " \u03BCs | Median: " << median.value()
-            << " \u03BCs | Total time: " << timing << " \u03BCs" << std::endl;
+            << " \u03BCs | Total time: " << timing << " \u03BCs" << "\n" <<std::endl;
 }
 
 template <typename scalar_t>
@@ -178,15 +178,15 @@ struct Benchmarker {
               << " | Median speedup: " << median.value()
               << " | Total time: " << total << " | worst speedup: " << min_
               << " | best speedup: " << max_ << "\nAverage speed v1: " << mean1 <<
-            " | Average speed v2: "<< mean2 <<std::endl;
+            " | Average speed v2: "<< mean2 << "\n" << std::endl;
   }
 private:
   void to_file_impl(const char* file) {
     std::ofstream out(file, std::ios::out | std::ios::app);
     out << "Average speedup: " << mean
         << " | Median speedup: " << median.value()
-        << " | Total time: " << total << " | worst speedup: " << min_
-        << " | best speedup: " << max_ << "\nAverage speed v1: " << mean1 <<
+        << " | Total time: " << total << " | Worst speedup: " << min_
+        << " | Best speedup: " << max_ << "\nAverage speed v1: " << mean1 <<
         " | Average speed v2: "<< mean2;
     out.close();
   }
